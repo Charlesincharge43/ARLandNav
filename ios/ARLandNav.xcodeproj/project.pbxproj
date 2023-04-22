@@ -16,6 +16,10 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9872573A29F494CD007FC694 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872573929F494CD007FC694 /* RCTCalendarModule.m */; };
 		9872573B29F494CD007FC694 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872573929F494CD007FC694 /* RCTCalendarModule.m */; };
+		9872573F29F499A7007FC694 /* SwiftModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872573E29F499A7007FC694 /* SwiftModuleTest.swift */; };
+		9872574029F499A7007FC694 /* SwiftModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872573E29F499A7007FC694 /* SwiftModuleTest.swift */; };
+		9872574229F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */; };
+		9872574329F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-ARLandNav-ARLandNavTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARLandNav-ARLandNavTests.release.xcconfig"; path = "Target Support Files/Pods-ARLandNav-ARLandNavTests/Pods-ARLandNav-ARLandNavTests.release.xcconfig"; sourceTree = "<group>"; };
 		9872573829F494A7007FC694 /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
 		9872573929F494CD007FC694 /* RCTCalendarModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
+		9872573C29F499A6007FC694 /* ARLandNav-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARLandNav-Bridging-Header.h"; sourceTree = "<group>"; };
+		9872573D29F499A6007FC694 /* ARLandNavTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARLandNavTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9872573E29F499A7007FC694 /* SwiftModuleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftModuleTest.swift; sourceTree = "<group>"; };
+		9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftModuleTestBridge.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -120,6 +128,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9872573E29F499A7007FC694 /* SwiftModuleTest.swift */,
+				9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */,
 				9872573829F494A7007FC694 /* RCTCalendarModule.h */,
 				9872573929F494CD007FC694 /* RCTCalendarModule.m */,
 				13B07FAE1A68108700A75B9A /* ARLandNav */,
@@ -128,6 +138,8 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				9872573C29F499A6007FC694 /* ARLandNav-Bridging-Header.h */,
+				9872573D29F499A6007FC694 /* ARLandNavTests-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -210,10 +222,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1410;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1410;
 					};
 				};
 			};
@@ -410,7 +423,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9872574029F499A7007FC694 /* SwiftModuleTest.swift in Sources */,
 				00E356F31AD99517003FC87E /* ARLandNavTests.m in Sources */,
+				9872574329F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */,
 				9872573B29F494CD007FC694 /* RCTCalendarModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,8 +435,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9872573A29F494CD007FC694 /* RCTCalendarModule.m in Sources */,
+				9872574229F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				9872573F29F499A7007FC694 /* SwiftModuleTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +457,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-ARLandNav-ARLandNavTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -459,6 +478,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARLandNavTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ARLandNav.app/ARLandNav";
 			};
 			name = Debug;
@@ -467,7 +489,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-ARLandNav-ARLandNavTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ARLandNavTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -483,6 +507,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARLandNavTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ARLandNav.app/ARLandNav";
 			};
 			name = Release;
@@ -508,6 +534,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ARLandNav;
+				SWIFT_OBJC_BRIDGING_HEADER = "ARLandNav-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -534,6 +561,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ARLandNav;
+				SWIFT_OBJC_BRIDGING_HEADER = "ARLandNav-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

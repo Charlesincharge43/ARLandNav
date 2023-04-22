@@ -50,6 +50,8 @@ function Section({children, title}: SectionProps): JSX.Element {
     console.log('wta doe123', NativeModules.CalendarModule.createCalendarEvent)
     // NativeModules.CalendarModule.createCalendarEvent('testName', 'testLocation');
     console.log('um what2')
+    console.log(NativeModules.SwiftModuleTest)
+    NativeModules.SwiftModuleTest.addEvent('testName2', 'testLocation2', 1234)
   }, []);
 
   const isDarkMode = useColorScheme() === 'dark';
