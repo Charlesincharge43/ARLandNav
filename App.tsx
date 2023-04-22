@@ -5,9 +5,10 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  NativeModules,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -29,7 +30,28 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+const { CalendarModule, HelloWorld } = NativeModules;
+
 function Section({children, title}: SectionProps): JSX.Element {
+  useEffect(() => {
+    console.log('mounted');
+    console.log('CalendarModuleFoo')
+    console.log(NativeModules.CalendarModuleFoo)
+    console.log('CalendarModule')
+    console.log(NativeModules.CalendarModule)
+    const res = NativeModules.CalendarModule.createCalendarEvent('testName', 'testLocation', (error: any, eventId: any) => {
+      if (error) {
+        console.error('Failed to create event:', error);
+      } else {
+        console.log('Event created with ID:', eventId);
+      }
+    })
+    console.log(res)
+    console.log('wta doe123', NativeModules.CalendarModule.createCalendarEvent)
+    // NativeModules.CalendarModule.createCalendarEvent('testName', 'testLocation');
+    console.log('um what2')
+  }, []);
+
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -77,7 +99,7 @@ function App(): JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+            Edit <Text style={styles.highlight}>App22.tsx</Text> to change this
             screen and then come back to see your edits.
           </Section>
           <Section title="See Your Changes">
