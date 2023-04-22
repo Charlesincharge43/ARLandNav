@@ -14,12 +14,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-ARLandNav-ARLandNavTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ARLandNav-ARLandNavTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9872573A29F494CD007FC694 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872573929F494CD007FC694 /* RCTCalendarModule.m */; };
-		9872573B29F494CD007FC694 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872573929F494CD007FC694 /* RCTCalendarModule.m */; };
-		9872573F29F499A7007FC694 /* SwiftModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872573E29F499A7007FC694 /* SwiftModuleTest.swift */; };
-		9872574029F499A7007FC694 /* SwiftModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872573E29F499A7007FC694 /* SwiftModuleTest.swift */; };
-		9872574229F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */; };
-		9872574329F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */; };
+		9872574929F49FBE007FC694 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872574829F49FBE007FC694 /* ARViewManager.swift */; };
+		9872574A29F49FBE007FC694 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872574829F49FBE007FC694 /* ARViewManager.swift */; };
+		9872574C29F4A010007FC694 /* ARViewManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574B29F4A010007FC694 /* ARViewManagerBridge.m */; };
+		9872574D29F4A010007FC694 /* ARViewManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574B29F4A010007FC694 /* ARViewManagerBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,12 +47,10 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-ARLandNav.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARLandNav.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ARLandNav/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ARLandNav-ARLandNavTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARLandNav-ARLandNavTests.release.xcconfig"; path = "Target Support Files/Pods-ARLandNav-ARLandNavTests/Pods-ARLandNav-ARLandNavTests.release.xcconfig"; sourceTree = "<group>"; };
-		9872573829F494A7007FC694 /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
-		9872573929F494CD007FC694 /* RCTCalendarModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		9872573C29F499A6007FC694 /* ARLandNav-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARLandNav-Bridging-Header.h"; sourceTree = "<group>"; };
 		9872573D29F499A6007FC694 /* ARLandNavTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARLandNavTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		9872573E29F499A7007FC694 /* SwiftModuleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftModuleTest.swift; sourceTree = "<group>"; };
-		9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftModuleTestBridge.m; sourceTree = "<group>"; };
+		9872574829F49FBE007FC694 /* ARViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; };
+		9872574B29F4A010007FC694 /* ARViewManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManagerBridge.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -128,10 +124,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				9872573E29F499A7007FC694 /* SwiftModuleTest.swift */,
-				9872574129F499F5007FC694 /* SwiftModuleTestBridge.m */,
-				9872573829F494A7007FC694 /* RCTCalendarModule.h */,
-				9872573929F494CD007FC694 /* RCTCalendarModule.m */,
+				9872574729F49F9C007FC694 /* ARViewManager */,
 				13B07FAE1A68108700A75B9A /* ARLandNav */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ARLandNavTests */,
@@ -153,6 +146,15 @@
 				00E356EE1AD99517003FC87E /* ARLandNavTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9872574729F49F9C007FC694 /* ARViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				9872574829F49FBE007FC694 /* ARViewManager.swift */,
+				9872574B29F4A010007FC694 /* ARViewManagerBridge.m */,
+			);
+			path = ARViewManager;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -423,10 +425,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9872574029F499A7007FC694 /* SwiftModuleTest.swift in Sources */,
+				9872574D29F4A010007FC694 /* ARViewManagerBridge.m in Sources */,
 				00E356F31AD99517003FC87E /* ARLandNavTests.m in Sources */,
-				9872574329F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */,
-				9872573B29F494CD007FC694 /* RCTCalendarModule.m in Sources */,
+				9872574A29F49FBE007FC694 /* ARViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,11 +435,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9872573A29F494CD007FC694 /* RCTCalendarModule.m in Sources */,
-				9872574229F499F5007FC694 /* SwiftModuleTestBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				9872574C29F4A010007FC694 /* ARViewManagerBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				9872573F29F499A7007FC694 /* SwiftModuleTest.swift in Sources */,
+				9872574929F49FBE007FC694 /* ARViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

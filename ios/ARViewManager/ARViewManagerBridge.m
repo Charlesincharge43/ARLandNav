@@ -1,8 +1,19 @@
 //
 //  ARViewManagerBridge.m
 //  ARLandNav
-//
-//  Created by Liming Li on 2023/4/22.
-//
 
-#import <Foundation/Foundation.h>
+// ARViewManagerBridge.m
+#import <React/RCTBridgeModule.h>
+
+@interface RCT_EXTERN_MODULE(ARViewManager, NSObject)
+
+RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)date)
+RCT_EXTERN_METHOD(startARView)
+RCT_EXTERN_METHOD(stopARView)
+
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
+
+@end
