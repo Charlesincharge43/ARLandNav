@@ -14,12 +14,22 @@ class ARViewManager: NSObject {
   @objc(startARView)
   func startARView() -> Void {
     print("Starting AR view")
-    // Code to start the AR view would go here
+    DispatchQueue.main.async {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
+      UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
+    }
   }
 
   @objc(stopARView)
   func stopARView() -> Void {
     print("Stopped AR view")
-    // Code to stop the AR view would go here
+    DispatchQueue.main.async {
+      guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
+        return
+      }
+      
+      rootViewController.dismiss(animated: true, completion: nil)
+    }
   }
 }
