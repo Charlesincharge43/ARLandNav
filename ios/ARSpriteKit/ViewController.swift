@@ -34,6 +34,7 @@ class ViewController: UIViewController, ARSKViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
+        configuration.worldAlignment = .gravityAndHeading
         //configuration.planeDetection = .horizontal
         
         // Run the view's session

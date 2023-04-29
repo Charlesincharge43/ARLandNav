@@ -8,9 +8,10 @@
 
 import SpriteKit
 import ARKit
+import CoreLocation
 
-class Scene: SKScene {
-        
+class Scene: SKScene, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
     let ghostsLabel = SKLabelNode(text: "Ghosts")
     let numberOfGhostsLabel = SKLabelNode(text: "0")
     var creationTime : TimeInterval = 0
@@ -34,84 +35,93 @@ class Scene: SKScene {
         numberOfGhostsLabel.color = .white
         numberOfGhostsLabel.position = CGPoint(x: 40, y: 10)
         addChild(numberOfGhostsLabel)
+      
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.startUpdatingLocation()
     }
     
     override func update(_ currentTime: TimeInterval) {
       createGhostAnchor()
     }
-    
-    func randomFloat(min: Float, max: Float) -> Float {
-        return (Float(arc4random()) / 0xFFFFFFFF) * (max - min) + min
+  
+    func getUserLocation() -> CLLocation? {
+        guard let location = locationManager.location else {
+            print("user location not found")
+            return nil
+        }
+        return location
     }
     
-  func createGhostAnchor() {
-      guard let sceneView = self.view as? ARSKView else {
-          return
-      }
-      if (ghostCount > 0) {
-          return
-      }
-      if (sceneView.session.currentFrame == nil) {
-        print("current Frame doesnt exist, skipping")
-        return
-      }
+    func createGhostAnchor() {
+        guard let sceneView = self.view as? ARSKView else {
+            return
+        }
+        if (ghostCount > 0) {
+            return
+        }
+        if (sceneView.session.currentFrame == nil) {
+            print("current Frame doesnt exist, skipping2")
+            return
+        }
 
-      // Define 360º in radians
-      let _360degrees = 2.0 * Float.pi
-      
-      // Create a rotation matrix in the X-axis
-      let rotateX = simd_float4x4(SCNMatrix4MakeRotation(_360degrees * randomFloat(min: 0.0, max: 1.0), 1, 0, 0))
-      
-      // Create a rotation matrix in the Y-axis
-      let rotateY = simd_float4x4(SCNMatrix4MakeRotation(_360degrees * randomFloat(min: 0.0, max: 1.0), 0, 1, 0))
-      
-      // Combine both rotation matrices
-      let rotation = simd_mul(rotateX, rotateY)
-      
-      // Create a translation matrix in the Z-axis with a value between 1 and 2 meters
-      var translation = matrix_identity_float4x4
-      translation.columns.3.z = -1 - randomFloat(min: 0.0, max: 1.0)
-      
-      // Set the distance of the ghost from the user
-      let distance: Float = 1.5 // 5 feet = 1.5 meters
-      let userPosition = sceneView.session.currentFrame?.camera.transform.columns.3
-      let direction = simd_float4(0, 0, -distance, 0)
-      let positionRelativeToCamera = simd_mul(sceneView.session.currentFrame?.camera.transform ?? matrix_identity_float4x4, direction)
-      let ghostPosition = simd_float4(userPosition!.x, userPosition!.y, userPosition!.z, 1) + positionRelativeToCamera
-      
-      // Set the position of the ghost anchor
-      translation.columns.3.x = ghostPosition.x
-      translation.columns.3.y = ghostPosition.y
-      translation.columns.3.z = ghostPosition.z
-      
-      // Combine the rotation and translation matrices
-      let transform = simd_mul(rotation, translation)
-      
-      // Create an anchor
-      let anchor = ARAnchor(transform: transform)
-      
-      // Add the anchor
-      sceneView.session.add(anchor: anchor)
-      
-      // Increment the counter
-      ghostCount += 1
-  }
+        guard let currentFrame = sceneView.session.currentFrame else {
+            return
+        }
+
+        guard let userLocation = getUserLocation() else {
+            return
+        }
+
+    
+//        // 838 W 15th Place, Chicago address
+//        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+    
+        // 840 W 15th Place, Chicago address (neighbor to the west)
+//        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+//        let distanceInMeters = Float(userLocation.distance(from: ghostLocation))
+    
+//    // 834 W 15th Place, Chicago address (neighbor to the East)
+        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861149), longitude: Double(-87.648018)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+
+        let delta_x = (userLocation.coordinate.longitude - ghostLocation.coordinate.longitude) * cos(ghostLocation.coordinate.latitude)
+        let delta_z = (userLocation.coordinate.latitude - ghostLocation.coordinate.latitude)
+        let delta_y = userLocation.altitude - ghostLocation.altitude
+        let delta_x_meters = delta_x * 111320
+        let delta_z_meters = delta_z * 111320
+        let direction = simd_float4(Float(delta_x_meters), Float(delta_y), Float(delta_z_meters), 0)
+
+        var translation = matrix_identity_float4x4
+        translation.columns.3.x = direction.x
+        translation.columns.3.y = direction.y
+        translation.columns.3.z = direction.z
+
+        // Create an anchor
+        let anchor = ARAnchor(transform: translation)
+    
+        // Add the anchor
+        sceneView.session.add(anchor: anchor)
+
+        // Increment the counter
+        ghostCount += 1
+    }
   
-  func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-          guard let ghostNode = node.childNodes.first else {
-              return
-          }
-          
-          // Get the distance from the camera to the ghost
-          let cameraPosition = renderer.pointOfView?.simdPosition ?? simd_float3.zero
-          let ghostPosition = ghostNode.simdPosition
-          let distance = simd_distance(cameraPosition, ghostPosition)
-          
-          // Set the ghost node's scale based on the distance
-          let maxDistance: Float = 2.0 // Adjust as necessary
-          let minScale: Float = 0.5 // Adjust as necessary
-          let maxScale: Float = 1.0 // Adjust as necessary
-          let scale = 1 - min(max(distance - 1, 0), maxDistance) / maxDistance * (maxScale - minScale) + minScale
-          ghostNode.scale = SCNVector3(x: scale, y: scale, z: scale)
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard let ghostNode = node.childNodes.first else {
+            return
+        }
+        
+        // Get the distance from the camera to the ghost
+        let cameraPosition = renderer.pointOfView?.simdPosition ?? simd_float3.zero
+        let ghostPosition = ghostNode.simdPosition
+        let distance = simd_distance(cameraPosition, ghostPosition)
+        
+        // Set the ghost node's scale based on the distance
+        let maxDistance: Float = 2.0 // Adjust as necessary
+        let minScale: Float = 0.5 // Adjust as necessary
+        let maxScale: Float = 1.0 // Adjust as necessary
+        let scale = 1 - min(max(distance - 1, 0), maxDistance) / maxDistance * (maxScale - minScale) + minScale
+        ghostNode.scale = SCNVector3(x: scale, y: scale, z: scale)
     }
 }
