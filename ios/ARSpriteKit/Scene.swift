@@ -62,7 +62,7 @@ class Scene: SKScene, CLLocationManagerDelegate {
             return
         }
         if (sceneView.session.currentFrame == nil) {
-            print("current Frame doesnt exist, skipping2")
+            print("current Frame doesnt exist, skipping3")
             return
         }
 
@@ -92,6 +92,9 @@ class Scene: SKScene, CLLocationManagerDelegate {
         let delta_z_meters = delta_z * 111320
         let direction = simd_float4(Float(delta_x_meters), Float(delta_y), Float(delta_z_meters), 0)
 
+//        print("direction")
+//        print(direction)
+
         var translation = matrix_identity_float4x4
         translation.columns.3.x = direction.x
         translation.columns.3.y = direction.y
@@ -105,23 +108,5 @@ class Scene: SKScene, CLLocationManagerDelegate {
 
         // Increment the counter
         ghostCount += 1
-    }
-  
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let ghostNode = node.childNodes.first else {
-            return
-        }
-        
-        // Get the distance from the camera to the ghost
-        let cameraPosition = renderer.pointOfView?.simdPosition ?? simd_float3.zero
-        let ghostPosition = ghostNode.simdPosition
-        let distance = simd_distance(cameraPosition, ghostPosition)
-        
-        // Set the ghost node's scale based on the distance
-        let maxDistance: Float = 2.0 // Adjust as necessary
-        let minScale: Float = 0.5 // Adjust as necessary
-        let maxScale: Float = 1.0 // Adjust as necessary
-        let scale = 1 - min(max(distance - 1, 0), maxDistance) / maxDistance * (maxScale - minScale) + minScale
-        ghostNode.scale = SCNVector3(x: scale, y: scale, z: scale)
     }
 }
