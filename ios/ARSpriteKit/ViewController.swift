@@ -10,9 +10,17 @@ import UIKit
 import SpriteKit
 import ARKit
 
+struct CheckpointStruct {
+    var isFake: Bool
+    var checkpointText: String
+    var coordinate: CLLocationCoordinate2D
+    var altitude: CLLocationDistance
+}
+
 class ViewController: UIViewController, ARSKViewDelegate {
     
     @IBOutlet var sceneView: ARSKView!
+    var checkpoints: [CheckpointStruct] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +32,9 @@ class ViewController: UIViewController, ARSKViewDelegate {
         sceneView.showsFPS = true
         sceneView.showsNodeCount = true
         
-        let scene = Scene(size: sceneView.bounds.size)
+        let scene = LandNavScene(size: sceneView.bounds.size)
         scene.scaleMode = .resizeFill
+        scene.viewController = self
         sceneView.presentScene(scene)
     }
     
@@ -35,7 +44,6 @@ class ViewController: UIViewController, ARSKViewDelegate {
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
-        //configuration.planeDetection = .horizontal
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -63,12 +71,12 @@ class ViewController: UIViewController, ARSKViewDelegate {
         let node = SKSpriteNode(imageNamed: "checkpointmarker")
         node.name = "checkpointmarker"
         node.size = CGSize(width: 1200, height: 1200)
-  
-        let parent = SKNode()
-        parent.addChild(node)
-        
         return node
     }
+  
+  func setCheckpoints(checkpointsList: [CheckpointStruct]) {
+    checkpoints = checkpointsList
+  }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user

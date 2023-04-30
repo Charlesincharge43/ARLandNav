@@ -9,7 +9,8 @@ import SpriteKit
 import ARKit
 import CoreLocation
 
-class Scene: SKScene, CLLocationManagerDelegate {
+class LandNavScene: SKScene, CLLocationManagerDelegate {
+    var viewController: ViewController?
     let locationManager = CLLocationManager()
     let checkpointMarkersLabel = SKLabelNode(text: "Checkpoint Markers")
     let numberOfCheckpointMarkers = SKLabelNode(text: "0")
@@ -18,6 +19,10 @@ class Scene: SKScene, CLLocationManagerDelegate {
         didSet{
             self.numberOfCheckpointMarkers.text = "\(checkpointMarkersCount)"
         }
+    }
+  
+    func delay(_ delay: Double, closure: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: closure)
     }
 
     override func didMove(to view: SKView) {
@@ -37,11 +42,26 @@ class Scene: SKScene, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
+      
+        // TODO: This is a hacky way to create anchor after everything mostly likely ready..
+        // Make this better later
+        delay(0.5) {
+          guard let viewController = self.viewController else {
+            print("ViewController is not defined")
+            return
+          }
+          for checkpoint in viewController.checkpoints {
+            print("inserting checkpoint")
+            print(checkpoint)
+            self.createCheckpointMarkerAnchor(checkpoint: checkpoint)
+          }
+          
+        }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-      createCheckpointMarkerAnchor()
-    }
+//    override func update(_ currentTime: TimeInterval) {
+//      createCheckpointMarkerAnchor()
+//    }
   
     func getUserLocation() -> CLLocation? {
         guard let location = locationManager.location else {
@@ -51,41 +71,29 @@ class Scene: SKScene, CLLocationManagerDelegate {
         return location
     }
     
-    func createCheckpointMarkerAnchor() {
+  func createCheckpointMarkerAnchor(checkpoint: CheckpointStruct) {
+        print("Creating checkpoint marker anchor")
         guard let sceneView = self.view as? ARSKView else {
-            return
-        }
-        if (checkpointMarkersCount > 0) {
+            print("Scene View is not defined")
             return
         }
 
         guard let userLocation = getUserLocation() else {
+            print("User Location not defined")
             return
         }
-              // 15th and Halsted address (the intersection where I take dog to the park)
-              let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861500), longitude: Double(-87.646750)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
-    
-////        // 838 W 15th Place, Chicago address
-//        let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
-    
-        // 840 W 15th Place, Chicago address (neighbor to the west)
-//        let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
-//        let distanceInMeters = Float(userLocation.distance(from: checkpointMarkerLocation))
-    
-    // 834 W 15th Place, Chicago address (neighbor to the East)
-//        let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861149), longitude: Double(-87.648018)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
 
-        let delta_x = (userLocation.coordinate.longitude - checkpointMarkerLocation.coordinate.longitude) * cos(checkpointMarkerLocation.coordinate.latitude)
-        let delta_z = (userLocation.coordinate.latitude - checkpointMarkerLocation.coordinate.latitude)
-        let delta_y = userLocation.altitude - checkpointMarkerLocation.altitude
+        let delta_x = (userLocation.coordinate.longitude - checkpoint.coordinate.longitude) * cos(checkpoint.coordinate.latitude)
+        let delta_z = (userLocation.coordinate.latitude - checkpoint.coordinate.latitude)
+        let delta_y = userLocation.altitude - checkpoint.altitude
         let delta_x_meters = delta_x * 111320
         let delta_z_meters = delta_z * 111320
         let direction = simd_float4(Float(delta_x_meters), Float(delta_y), Float(delta_z_meters), 0)
 
 //        print("direction")
 //        print(direction)
-//        print("distance") // for debuggin
-//        print(Float(userLocation.distance(from: checkpointMarkerLocation)))
+//        print("distance") // for debugging
+//        print(Float(userLocation.distance(from: CLLocation(coordinate: CLLocationCoordinate2D(latitude: checkpoint.coordinate.latitude, longitude: checkpoint.coordinate.longitude), altitude: checkpoint.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date()))))
 
         var translation = matrix_identity_float4x4
         translation.columns.3.x = direction.x
