@@ -27,7 +27,7 @@ class ARViewManager: NSObject {
         // 838 W 15th Place, Chicago address
         CheckpointStruct(isFake: false, checkpointText: "32", coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: 183),
         // 840 W 15th Place, Chicago address (neighbor to the west)
-        CheckpointStruct(isFake: false, checkpointText: "32", coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: 183),
+        CheckpointStruct(isFake: false, checkpointText: "31", coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: 183),
       ])
       UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }

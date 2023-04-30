@@ -101,7 +101,7 @@ class LandNavScene: SKScene, CLLocationManagerDelegate {
         translation.columns.3.z = direction.z
 
         // Create an anchor
-        let anchor = ARAnchor(transform: translation)
+        let anchor = ARAnchor(name: checkpoint.checkpointText, transform: translation)
     
         // Add the anchor
         sceneView.session.add(anchor: anchor)

@@ -68,10 +68,22 @@ class ViewController: UIViewController, ARSKViewDelegate {
     // MARK: - ARSKViewDelegate
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
+        print("name anchor? ")
+        print(anchor.name)
         let node = SKSpriteNode(imageNamed: "checkpointmarker")
         node.name = "checkpointmarker"
         node.size = CGSize(width: 1200, height: 1200)
-        return node
+      
+        let labelNode = SKLabelNode(text: anchor.name)
+        labelNode.position = CGPoint(x: 50, y: 400)
+        labelNode.fontName = "HelveticaNeue-Bold"
+        labelNode.fontSize = 60
+        labelNode.fontColor = UIColor.black
+      
+        var parent = SKNode()
+        parent.addChild(node)
+        parent.addChild(labelNode)
+        return parent
     }
   
   func setCheckpoints(checkpointsList: [CheckpointStruct]) {
