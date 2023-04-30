@@ -60,10 +60,12 @@ class ViewController: UIViewController, ARSKViewDelegate {
     // MARK: - ARSKViewDelegate
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
-        let ghostId = randomInt(min: 1, max: 6)
-        
-        let node = SKSpriteNode(imageNamed: "ghost\(ghostId)")
-        node.name = "ghost"
+        let node = SKSpriteNode(imageNamed: "checkpointmarker")
+        node.name = "checkpointmarker"
+        node.size = CGSize(width: 1200, height: 1200)
+  
+        let parent = SKNode()
+        parent.addChild(node)
         
         return node
     }

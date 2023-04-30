@@ -2,8 +2,7 @@
 //  Scene.swift
 //  ARSpriteKit
 //
-//  Created by Esteban Herrera on 7/4/17.
-//  Copyright © 2017 Esteban Herrera. All rights reserved.
+//  Created by Charles Long on 4/29/23.
 //
 
 import SpriteKit
@@ -12,29 +11,27 @@ import CoreLocation
 
 class Scene: SKScene, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-    let ghostsLabel = SKLabelNode(text: "Ghosts")
-    let numberOfGhostsLabel = SKLabelNode(text: "0")
+    let checkpointMarkersLabel = SKLabelNode(text: "Checkpoint Markers")
+    let numberOfCheckpointMarkers = SKLabelNode(text: "0")
     var creationTime : TimeInterval = 0
-    var ghostCount = 0 {
+    var checkpointMarkersCount = 0 {
         didSet{
-            self.numberOfGhostsLabel.text = "\(ghostCount)"
+            self.numberOfCheckpointMarkers.text = "\(checkpointMarkersCount)"
         }
     }
-    
-    let killSound = SKAction.playSoundFileNamed("ghost", waitForCompletion: false)
-    
+
     override func didMove(to view: SKView) {
-        ghostsLabel.fontSize = 20
-        ghostsLabel.fontName = "DevanagariSangamMN-Bold"
-        ghostsLabel.color = .white
-        ghostsLabel.position = CGPoint(x: 40, y: 50)
-        addChild(ghostsLabel)
+        checkpointMarkersLabel.fontSize = 20
+        checkpointMarkersLabel.fontName = "DevanagariSangamMN-Bold"
+        checkpointMarkersLabel.color = .white
+        checkpointMarkersLabel.position = CGPoint(x: 100, y: 50)
+        addChild(checkpointMarkersLabel)
         
-        numberOfGhostsLabel.fontSize = 30
-        numberOfGhostsLabel.fontName = "DevanagariSangamMN-Bold"
-        numberOfGhostsLabel.color = .white
-        numberOfGhostsLabel.position = CGPoint(x: 40, y: 10)
-        addChild(numberOfGhostsLabel)
+        numberOfCheckpointMarkers.fontSize = 30
+        numberOfCheckpointMarkers.fontName = "DevanagariSangamMN-Bold"
+        numberOfCheckpointMarkers.color = .white
+        numberOfCheckpointMarkers.position = CGPoint(x: 40, y: 10)
+        addChild(numberOfCheckpointMarkers)
       
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -43,7 +40,7 @@ class Scene: SKScene, CLLocationManagerDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-      createGhostAnchor()
+      createCheckpointMarkerAnchor()
     }
   
     func getUserLocation() -> CLLocation? {
@@ -54,19 +51,11 @@ class Scene: SKScene, CLLocationManagerDelegate {
         return location
     }
     
-    func createGhostAnchor() {
+    func createCheckpointMarkerAnchor() {
         guard let sceneView = self.view as? ARSKView else {
             return
         }
-        if (ghostCount > 0) {
-            return
-        }
-        if (sceneView.session.currentFrame == nil) {
-            print("current Frame doesnt exist, skipping3")
-            return
-        }
-
-        guard let currentFrame = sceneView.session.currentFrame else {
+        if (checkpointMarkersCount > 0) {
             return
         }
 
@@ -74,27 +63,29 @@ class Scene: SKScene, CLLocationManagerDelegate {
             return
         }
               // 15th and Halsted address (the intersection where I take dog to the park)
-//              let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861500), longitude: Double(-87.646750)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+              let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861500), longitude: Double(-87.646750)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
     
 ////        // 838 W 15th Place, Chicago address
-//        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+//        let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
     
         // 840 W 15th Place, Chicago address (neighbor to the west)
-//        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
-//        let distanceInMeters = Float(userLocation.distance(from: ghostLocation))
+//        let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+//        let distanceInMeters = Float(userLocation.distance(from: checkpointMarkerLocation))
     
     // 834 W 15th Place, Chicago address (neighbor to the East)
-        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861149), longitude: Double(-87.648018)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+//        let checkpointMarkerLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861149), longitude: Double(-87.648018)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
 
-        let delta_x = (userLocation.coordinate.longitude - ghostLocation.coordinate.longitude) * cos(ghostLocation.coordinate.latitude)
-        let delta_z = (userLocation.coordinate.latitude - ghostLocation.coordinate.latitude)
-        let delta_y = userLocation.altitude - ghostLocation.altitude
+        let delta_x = (userLocation.coordinate.longitude - checkpointMarkerLocation.coordinate.longitude) * cos(checkpointMarkerLocation.coordinate.latitude)
+        let delta_z = (userLocation.coordinate.latitude - checkpointMarkerLocation.coordinate.latitude)
+        let delta_y = userLocation.altitude - checkpointMarkerLocation.altitude
         let delta_x_meters = delta_x * 111320
         let delta_z_meters = delta_z * 111320
         let direction = simd_float4(Float(delta_x_meters), Float(delta_y), Float(delta_z_meters), 0)
 
 //        print("direction")
 //        print(direction)
+//        print("distance") // for debuggin
+//        print(Float(userLocation.distance(from: checkpointMarkerLocation)))
 
         var translation = matrix_identity_float4x4
         translation.columns.3.x = direction.x
@@ -108,6 +99,6 @@ class Scene: SKScene, CLLocationManagerDelegate {
         sceneView.session.add(anchor: anchor)
 
         // Increment the counter
-        ghostCount += 1
+        checkpointMarkersCount += 1
     }
 }
