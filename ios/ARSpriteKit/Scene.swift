@@ -73,16 +73,17 @@ class Scene: SKScene, CLLocationManagerDelegate {
         guard let userLocation = getUserLocation() else {
             return
         }
-
+              // 15th and Halsted address (the intersection where I take dog to the park)
+//              let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861500), longitude: Double(-87.646750)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
     
-//        // 838 W 15th Place, Chicago address
+////        // 838 W 15th Place, Chicago address
 //        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
     
         // 840 W 15th Place, Chicago address (neighbor to the west)
 //        let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
 //        let distanceInMeters = Float(userLocation.distance(from: ghostLocation))
     
-//    // 834 W 15th Place, Chicago address (neighbor to the East)
+    // 834 W 15th Place, Chicago address (neighbor to the East)
         let ghostLocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: Double(41.861149), longitude: Double(-87.648018)), altitude: userLocation.altitude, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
 
         let delta_x = (userLocation.coordinate.longitude - ghostLocation.coordinate.longitude) * cos(ghostLocation.coordinate.latitude)
