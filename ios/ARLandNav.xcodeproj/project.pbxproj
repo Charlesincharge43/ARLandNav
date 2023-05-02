@@ -18,18 +18,16 @@
 		9872574A29F49FBE007FC694 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9872574829F49FBE007FC694 /* ARViewManager.swift */; };
 		9872574C29F4A010007FC694 /* ARViewManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574B29F4A010007FC694 /* ARViewManagerBridge.m */; };
 		9872574D29F4A010007FC694 /* ARViewManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9872574B29F4A010007FC694 /* ARViewManagerBridge.m */; };
-		987257AF29F5E0C6007FC694 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AD29F5E0C6007FC694 /* Scene.swift */; };
-		987257B029F5E0C6007FC694 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AD29F5E0C6007FC694 /* Scene.swift */; };
-		987257B129F5E0C6007FC694 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AE29F5E0C6007FC694 /* ViewController.swift */; };
-		987257B229F5E0C6007FC694 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AE29F5E0C6007FC694 /* ViewController.swift */; };
-		987257B429F5E116007FC694 /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 987257B329F5E116007FC694 /* Scene.sks */; };
-		987257B529F5E116007FC694 /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 987257B329F5E116007FC694 /* Scene.sks */; };
-		987257B729F5E2AA007FC694 /* ghost.wav in Resources */ = {isa = PBXBuildFile; fileRef = 987257B629F5E2AA007FC694 /* ghost.wav */; };
-		987257B829F5E2AA007FC694 /* ghost.wav in Resources */ = {isa = PBXBuildFile; fileRef = 987257B629F5E2AA007FC694 /* ghost.wav */; };
+		987257AF29F5E0C6007FC694 /* LandNavScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AD29F5E0C6007FC694 /* LandNavScene.swift */; };
+		987257B029F5E0C6007FC694 /* LandNavScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AD29F5E0C6007FC694 /* LandNavScene.swift */; };
+		987257B129F5E0C6007FC694 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AE29F5E0C6007FC694 /* ARViewController.swift */; };
+		987257B229F5E0C6007FC694 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987257AE29F5E0C6007FC694 /* ARViewController.swift */; };
 		987257BD29F5E414007FC694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987257BC29F5E414007FC694 /* Assets.xcassets */; };
 		987257BE29F5E414007FC694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987257BC29F5E414007FC694 /* Assets.xcassets */; };
-		987257C029F5E625007FC694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 987257BF29F5E625007FC694 /* Main.storyboard */; };
-		987257C129F5E625007FC694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 987257BF29F5E625007FC694 /* Main.storyboard */; };
+		98E2A65729FF2650009BD2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E2A65629FF2650009BD2ED /* Main.storyboard */; };
+		98E2A65829FF2650009BD2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E2A65629FF2650009BD2ED /* Main.storyboard */; };
+		98FF4D292A00824D0035B469 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 98FF4D282A00824C0035B469 /* Models.scnassets */; };
+		98FF4D2A2A00824D0035B469 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 98FF4D282A00824C0035B469 /* Models.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,12 +61,11 @@
 		9872573D29F499A6007FC694 /* ARLandNavTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARLandNavTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		9872574829F49FBE007FC694 /* ARViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; };
 		9872574B29F4A010007FC694 /* ARViewManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManagerBridge.m; sourceTree = "<group>"; };
-		987257AD29F5E0C6007FC694 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
-		987257AE29F5E0C6007FC694 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		987257B329F5E116007FC694 /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
-		987257B629F5E2AA007FC694 /* ghost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ghost.wav; sourceTree = "<group>"; };
+		987257AD29F5E0C6007FC694 /* LandNavScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandNavScene.swift; sourceTree = "<group>"; };
+		987257AE29F5E0C6007FC694 /* ARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		987257BC29F5E414007FC694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		987257BF29F5E625007FC694 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		98E2A65629FF2650009BD2ED /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		98FF4D282A00824C0035B469 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -179,12 +176,11 @@
 		987257AC29F5E0B8007FC694 /* ARSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
-				987257BF29F5E625007FC694 /* Main.storyboard */,
-				987257B629F5E2AA007FC694 /* ghost.wav */,
-				987257B329F5E116007FC694 /* Scene.sks */,
-				987257AD29F5E0C6007FC694 /* Scene.swift */,
-				987257AE29F5E0C6007FC694 /* ViewController.swift */,
+				987257AD29F5E0C6007FC694 /* LandNavScene.swift */,
+				987257AE29F5E0C6007FC694 /* ARViewController.swift */,
 				987257BC29F5E414007FC694 /* Assets.xcassets */,
+				98E2A65629FF2650009BD2ED /* Main.storyboard */,
+				98FF4D282A00824C0035B469 /* Models.scnassets */,
 			);
 			path = ARSpriteKit;
 			sourceTree = "<group>";
@@ -288,10 +284,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				987257B829F5E2AA007FC694 /* ghost.wav in Resources */,
+				98FF4D2A2A00824D0035B469 /* Models.scnassets in Resources */,
 				987257BE29F5E414007FC694 /* Assets.xcassets in Resources */,
-				987257B529F5E116007FC694 /* Scene.sks in Resources */,
-				987257C129F5E625007FC694 /* Main.storyboard in Resources */,
+				98E2A65829FF2650009BD2ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,12 +294,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				987257B429F5E116007FC694 /* Scene.sks in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				987257B729F5E2AA007FC694 /* ghost.wav in Resources */,
-				987257C029F5E625007FC694 /* Main.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				98FF4D292A00824D0035B469 /* Models.scnassets in Resources */,
 				987257BD29F5E414007FC694 /* Assets.xcassets in Resources */,
+				98E2A65729FF2650009BD2ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,8 +459,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				987257B229F5E0C6007FC694 /* ViewController.swift in Sources */,
-				987257B029F5E0C6007FC694 /* Scene.swift in Sources */,
+				987257B229F5E0C6007FC694 /* ARViewController.swift in Sources */,
+				987257B029F5E0C6007FC694 /* LandNavScene.swift in Sources */,
 				9872574D29F4A010007FC694 /* ARViewManagerBridge.m in Sources */,
 				00E356F31AD99517003FC87E /* ARLandNavTests.m in Sources */,
 				9872574A29F49FBE007FC694 /* ARViewManager.swift in Sources */,
@@ -477,10 +471,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				987257B129F5E0C6007FC694 /* ViewController.swift in Sources */,
+				987257B129F5E0C6007FC694 /* ARViewController.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				9872574C29F4A010007FC694 /* ARViewManagerBridge.m in Sources */,
-				987257AF29F5E0C6007FC694 /* Scene.swift in Sources */,
+				987257AF29F5E0C6007FC694 /* LandNavScene.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				9872574929F49FBE007FC694 /* ARViewManager.swift in Sources */,
 			);

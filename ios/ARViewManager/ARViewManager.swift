@@ -18,7 +18,7 @@ class ARViewManager: NSObject {
     print("Starting AR view")
     DispatchQueue.main.async {
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+      let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ARViewController
       viewController.setCheckpoints(checkpointsList: [
         // 15th and Halsted address (the intersection where I take dog to the park)
         CheckpointStruct(isFake: false, checkpointText: "34", coordinate: CLLocationCoordinate2D(latitude: Double(41.861500), longitude: Double(-87.646750)), altitude: 183),
@@ -28,6 +28,8 @@ class ARViewManager: NSObject {
         CheckpointStruct(isFake: false, checkpointText: "32", coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648160)), altitude: 183),
         // 840 W 15th Place, Chicago address (neighbor to the west)
         CheckpointStruct(isFake: false, checkpointText: "31", coordinate: CLLocationCoordinate2D(latitude: Double(41.861150), longitude: Double(-87.648220)), altitude: 183),
+        // South of my location
+        CheckpointStruct(isFake: false, checkpointText: "00", coordinate: CLLocationCoordinate2D(latitude: Double(41.860974), longitude: Double(-87.648138)), altitude: 183),
       ])
       UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
