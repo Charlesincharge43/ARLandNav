@@ -11,6 +11,10 @@ import CoreLocation
 class LandNavScene: SCNScene, CLLocationManagerDelegate {
     var viewController: ARViewController?
     let locationManager = CLLocationManager()
+    var bestVerticalAccuracy = CLLocationAccuracy(1000000)
+    var bestHorizontalAccuracy = CLLocationAccuracy(100000)
+    var startingLocation: CLLocation?
+    var isInitialized = false
 //    let checkpointMarkersLabel = SKLabelNode(text: "Checkpoint Markers")
 //    let numberOfCheckpointMarkers = SKLabelNode(text: "0")
     var creationTime : TimeInterval = 0
@@ -50,7 +54,8 @@ class LandNavScene: SCNScene, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
       
-        delay(0.5) {
+        delay(2.5) {
+          self.isInitialized = true
           guard let viewController = self.viewController else {
             return
           }
@@ -64,11 +69,26 @@ class LandNavScene: SCNScene, CLLocationManagerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
   
-    func getUserLocation() -> CLLocation? {
-        guard let location = locationManager.location else {
-            return nil
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            return
         }
-        return location
+      // Store the location if it hasn't been set before
+        if isInitialized == false {
+//          print("vertical accuracy")
+//          print(location.verticalAccuracy)
+//          print("best vertical accuracy so far")
+//          print(bestVerticalAccuracy)
+//          print("horizontal accuracy")
+//          print(location.horizontalAccuracy)
+//          print("best horizontal accuracy so far")
+//          print(bestHorizontalAccuracy)
+          if location.horizontalAccuracy < bestHorizontalAccuracy && location.verticalAccuracy < bestVerticalAccuracy {
+            bestHorizontalAccuracy = location.horizontalAccuracy
+            bestVerticalAccuracy = location.verticalAccuracy
+            self.startingLocation = location
+          }
+        }
     }
     
     func createCheckpointMarkerAnchor(checkpoint: CheckpointStruct) {
@@ -76,9 +96,7 @@ class LandNavScene: SCNScene, CLLocationManagerDelegate {
             return
         }
 
-        guard let userLocation = getUserLocation() else {
-            return
-        }
+        let userLocation = self.startingLocation!
 
         let delta_x = (userLocation.coordinate.longitude - checkpoint.coordinate.longitude) * cos(checkpoint.coordinate.latitude)
         let delta_z = (userLocation.coordinate.latitude - checkpoint.coordinate.latitude)
