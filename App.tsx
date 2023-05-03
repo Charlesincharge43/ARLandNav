@@ -18,15 +18,10 @@ const App = () => {
   // Switch to AR view
   const startARView = () => {
     ARViewManager.startARView([
-      // 15th and Halsted address (the intersection where I take dog to the park)
       { isFake: false, checkpointText: "34", latitude: 41.861500, longitude: -87.64675, altitude: 183 },
-      // 834 W 15th Place, Chicago address (neighbor to the East)
       { isFake: false, checkpointText: "33", latitude: 41.861149, longitude: -87.648018, altitude: 183 },
-      // 838 W 15th Place, Chicago address
       { isFake: false, checkpointText: "32", latitude: 41.861150, longitude: -87.648160, altitude: 183 },
-      // 840 W 15th Place, Chicago address (neighbor to the west)
       { isFake: false, checkpointText: "31", latitude: 41.861150, longitude: -87.648220, altitude: 183 },
-      // South of my location
       { isFake: false, checkpointText: "00", latitude: 41.860974, longitude: -87.648138, altitude: 183 },
     ]);
     setShowARView(true);
