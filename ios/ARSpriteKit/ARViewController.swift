@@ -82,6 +82,31 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
       signNode.addChildNode(labelNode1)
       signNode.addChildNode(labelNode2)
       signNode.position = SCNVector3(0, cylinderHeight/2 - 0.3 + signCube.height/2, 0)
+      // Get the camera node
+      let cameraNode = sceneView.pointOfView
+      if cameraNode != nil {
+        let anchorPos = SCNVector3Make(
+          anchor.transform.columns.3.x,
+          anchor.transform.columns.3.y,
+          anchor.transform.columns.3.z
+        )
+
+        // Get the position of the camera node in world coordinates
+        let cameraPosition = cameraNode!.worldPosition
+        // Calculate the vector pointing from the camera node to the node
+        let vectorToNode = SCNVector3(x: anchorPos.x - cameraPosition.x,
+                                      y: anchorPos.y - cameraPosition.y,
+                                      z: anchorPos.z - cameraPosition.z)
+        // Calculate the rotation needed to face the node
+        let rotationMatrix = SCNMatrix4MakeRotation(-atan2(vectorToNode.x, vectorToNode.z), 0, 1, 0)
+
+        // Calculate the rotation needed to face the node
+        let rotationAngle = atan2(vectorToNode.x, vectorToNode.z)
+        let rotation = SCNVector4(x: 0, y: 1, z: 0, w: rotationAngle)
+
+        // Set the rotation of the node
+        signNode.rotation = rotation
+      }
 
       let parentNode = SCNNode()
       parentNode.addChildNode(signNode)
